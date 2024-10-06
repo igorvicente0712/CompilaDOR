@@ -12,7 +12,7 @@ public class MathOperator extends AFD {
                 if (code.next() == '+') {
                     return new Token("INCREMENTO", "++");
                 } else {
-                    return new Token("PLUS", "+");
+                    return new Token("ADC", "+");
                 }
             //return new Token("PLUS", "+");
                 

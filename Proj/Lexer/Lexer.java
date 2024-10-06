@@ -16,6 +16,8 @@ public class Lexer{
         //afds.add(new IncAndDec);
         afds.add(new MathOperator());
         afds.add(new Number());
+        afds.add(new Comment());
+        
 
     }
 

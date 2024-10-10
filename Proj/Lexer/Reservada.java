@@ -4,7 +4,7 @@ import java.text.CharacterIterator;
 
 public class Reservada extends AFD {
 
-    String reservadas[] = {"caso", "positivo", "negativo", "enquanto", "sendo", "mostre", "receba"};
+    String reservadas[] = {"caso", "positivo", "negativo", "enquanto", "sendo", "mostre", "receba", "eh", "faz"};
 
     @Override
     public Token evaluate(CharacterIterator code) {

@@ -1,5 +1,20 @@
 <h1>Analisador Sintático</h1>
 <h2>Gramaticas livres de contexto</h2>
+<h3>Comer-> Input-> ok</h3>
+
+```
+comer -> comer ( expressao ) ;
+expressao -> id | num | flutuante | string
+id -> [a-zA-Z]⁺
+num -> [0-9]⁺
+flutuante -> num . num
+string -> " (id | num | flutuante)⁺ "
+```
+Exemplos:
+>comer(variavel);
+
+>Comer(123);
+
 <h3>Cuspir ->Print -> ok</h3>
 
 ```
@@ -21,7 +36,7 @@ Exemplos:
 
 >cuspir("Ola 123 3.14");
 
-<h3>Comentário -> ok</h3>
+<h3>Comentário-> ok</h3>
 
 ```
 comentario -> /// texto

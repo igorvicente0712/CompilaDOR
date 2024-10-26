@@ -14,8 +14,11 @@ string -> " (id | num | flutuante)⁺ "
 Exemplos:
 
 >cuspir(variavel);
+
 >cuspir(123);
+
 >cuspir(3.14);
+
 >cuspir("Ola 123 3.14");
 
 <h3>Comentário -> ok</h3>
@@ -25,3 +28,8 @@ comentario -> /// texto
 
 texto -> [a-zA-Z0-9]⁺
 ```
+Exemplos:
+
+>/// texto
+
+>///(123);

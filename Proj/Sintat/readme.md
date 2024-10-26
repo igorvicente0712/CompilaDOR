@@ -1,5 +1,13 @@
 <h1>Analisador Sintático</h1>
 <h2>Gramaticas livres de contexto</h2>
+<h3>temVozes-nasParedes-> if-else-> ok</h3>
+
+```
+declaracaoif -> temVozes ( expressaobooleana ) blococodigo [nasParedes blococodigo]
+expressaobooleana -> expressao (operadorcomparacao expressao)*
+operador_comparacao -> == | != | < | > | <= | >=
+bloco_codigo -> { [declaracao]* }
+```
 <h3>Comer-> Input-> ok</h3>
 
 ```

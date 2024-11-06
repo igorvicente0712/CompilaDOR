@@ -106,6 +106,20 @@ public class Parser {
         return false;
     }
 
+    private boolean ifStatement() {
+        if (condicao() && matchLexema("entao") && expressao()) {
+            while (matchLexema("se")) {  // Mais de um se no mesmo escopo
+                if (!ifStatement()) erro("Nested if");
+            }
+            if (matchLexema("senao")) {
+                return expressao();
+            }
+            return true;
+        }
+        erro("ifStatement");
+        return false;
+    }
+
     public boolean condicao() {
         if (matchTipo("id") && operador() && matchTipo("num")) {
             return true;
@@ -155,7 +169,7 @@ public class Parser {
             ) {
             return true;
         }
-        erro("ifelse");
+        erro("repeticao");
         return false;
     }
     
@@ -180,7 +194,7 @@ public class Parser {
             ) {
             return true;
         }
-        erro("forloop");
+        erro("atribVariavel");
         return false;
     }
     
@@ -188,7 +202,7 @@ public class Parser {
         if (expressao()) {
             return true;
         }
-        erro("forloop");
+        erro("escreve");
         return false;
     }
 

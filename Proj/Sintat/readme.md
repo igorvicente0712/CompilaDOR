@@ -13,7 +13,7 @@ Programa -> first
       | ";"
 
 ```
-first -> sefaz first | enquantoLoop first | ... | expressao first | ";" |  ∈
+first -> sefaz first | enquantoLoop first | expressao first | ";" |  ∈
 sefaz -> "se" Condicao "faz" first A
 A -> "caso" first | ∈
 ```

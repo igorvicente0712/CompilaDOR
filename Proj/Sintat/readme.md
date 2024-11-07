@@ -1,110 +1,119 @@
 <h1>Analisador Sintático</h1>
 <h2>Gramaticas livres de contexto</h2>
 
-<h3>First-> ok</h3>
+Programa -> first
+
+<h2>Declarações Básicas</h2>
+
+<h3>first -> Se statement | Caso | Enquanto | Comer</h3> 
+
+      | AtribVar 
+      | Comentario 
+      | Cuspir 
+      | ";"
 
 ```
-first -> se first | caso first | enquanto first | comer | variavel first | comentario first | cuspir | ε
+first -> sefaz first | enquantoLoop first | ... | expressao first | ";" |  ∈
+sefaz -> "se" Condicao "faz" first A
+A -> "caso" first | ∈
 ```
 
-<h3>atrVar-> Atribuir variável-> ok</h3>
+<h3>enquantoLoop -> "enquanto" Condicao "repete" first</h3>
+
+Atribuições e Inicializações
+
+<h3>AtribVar -> TipoVariavel id "=" Expressao ";"</h3>
+
+Tipos de Variáveis
+
+<h3>TipoVariavel -> "inteiro" | "flutuante" | "texto"</h3>
+
+Sistema de Expressões
 
 ```
-atribVariavel -> tipoVariavel variavel "=" mathExpressao "."
-tipoVariavel -> taOk | gaviao | caixaPreta
-variavel -> id | num | flutuante | string
-
-id -> [a-zA-Z]⁺
-num -> [0-9]⁺
-flutuante -> num.num
-string -> " (id + num + flutuante) "
-```
-
-<h3>se-> if-> ok</h3>
+expressaoMat -> TexpressaoMat’
+expressaoMat’ -> +TexpressaoMat’ | -TexpressaoMat’ | ε
+T -> FT´
+T´ -> *FT´ | /FT´ | ε
+F -> id | num | flutuante | input | ( mathExpressao )
 
 ```
-se -> se condicao positivo first negativo
-negativo -> negativo first | ε
-condicao -> [variavel operador variavel]⁺ | ε
-variavel -> id | num | flutuante | string | ( mathExpressao )
-operador -> ">" | "<" | "==" | "!=" | "&&" | "||" | "+" | "-" | "\" | "*" | "/" | "="
-expressao -> first ";"
+<h3>Condições</h3>
 
-id -> [a-zA-Z]⁺
-num -> [0-9]⁺
-flutuante -> num⁺.num⁺
-string -> "(id+num+flutuante)"
-```
-<h3>caso-> for-> ok</h3>
+Condicao -> id Operador variavel
+
+<h3>Operadores</h3>
 
 ```
-caso- -> caso- varContador ":" condicao ":" first 
-varContador -> tipoVariavel variavel operador num
-condicao -> variavel operador variavel
-
-id -> [a-zA-Z]⁺
-num -> [0-9]⁺ | ε
-flutuante -> num⁺.num⁺ | ε
-string -> "(id+num+flutuante)"
+Operador -> OperadorLogico || OperadorComparacao || OperadorMat || OperadorAtribuicao
+OperadorLogico -> "&&" | "||"
+OperadorComparacao -> ">" | "<" | "==" | "!=" | ">=" | "<="
+OperadorMat -> "+" | "-" | "*" | "/"
+OperadorAtribuicao -> "="
 ```
-<h3>enquanto-> While-> ok</h3>
+<h3>Input e Print</h3>
 
 ```
-while -> enquanto condicao  first
-condicao -> variavel operador variavel
-varivel -> id | num | flutuante | string | mathExpressao
-operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"
-
-id -> [a-zA-Z]⁺
-num -> [0-9]⁺
-flutuante -> num.num
-string -> "\"" (id | num | flutuante) "\""
+Comer -> "comer" first
+Cuspir -> "cuspir" first
 ```
-<h3>Comer-> Input-> ok</h3>
+
+<h3>Sistema de Comentários</h3>
 
 ```
-comer -> comer ( expressao ) ;
-expressao -> id | num | flutuante | string
-id -> [a-zA-Z]⁺
-num -> [0-9]⁺
-flutuante -> num . num
-string -> " (id | num | flutuante)⁺ "
+Comentario -> "obs:" [a-zA-Z0-9]* ";"
 ```
-Exemplos:
->comer(variavel);
 
->Comer(123);
-
-<h3>Cuspir ->Print -> ok</h3>
+<h3>Identificadores e Literais</h3>
 
 ```
-cuspir -> cuspir ( expressao )
-cuspir -> cuspir ( texto ) ;
-texto -> id | num | flutuante | string
-id -> [a-zA-Z]⁺
-num -> [0-9]⁺
-flutuante -> num . num
-string -> " (id | num | flutuante)⁺ "
+Variavel -> Id | num | flutuante | string
+Id -> [a-zA-Z][a-zA-Z0-9]*
+Num -> [0-9]+
+Flutuante -> Num "," Num
+String -> """ ([^"\n])* """
 ```
-Exemplos:
-
->cuspir(variavel);
-
->cuspir(123);
-
->cuspir(3.14);
-
->cuspir("Ola 123 3.14");
-
-<h3>Comentário-> ok</h3>
+<h3>Caracteres Especiais e Delimitadores</h3>
 
 ```
-comentario -> /// texto
+Delimitador -> "(" | ")"
+Exemplos de uso:
+Declaração e atribuição:
+inteiro x = 10;
+flutuante y = 3.14;
+texto mensagem = "Olá mundo";
 
-texto -> [a-zA-Z0-9]⁺
+Estrutura Se:
+se x > 10 faz cuspir("Maior que 10") senao cuspir "Menor ou igual a 10";
+
+Estrutura enquanto:
+enquanto i < 10 repete cuspir(i);
+
+Estrut sendo repete
+
+sendo i = 0 até i < 3 repete cuspir(i);
+
+Input e Print:
+cuspir("Digite um número:");
+
+comer(x);
+
+cuspir("Você digitou: ");
+
+cuspir(x);
+
+Comentários:
+obs: Este é um comentário;
+
+inteiro soma = 0; obs Inicializa a variável soma;
+
+
+Expressões Complexas:
+inteiro resultado = (x + y) * (z - w);
+
+se (a > b && c < d || e == f) {
+
+cuspir("Condição complexa");
+}
+
 ```
-Exemplos:
-
->/// texto
-
->///(123);

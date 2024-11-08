@@ -51,7 +51,7 @@ TipoVariavel -> "inteiro" | "flutuante" | "texto"
 
 ```
 Expressao -> Termo Expressao’
-Expressao’ -> +Termo Expressao’ | -Termo Expressao’ | ε
+Expressao’ -> "+" Termo Expressao’ | "-" Termo Expressao’ | ε
 Termo -> Fator Termo’
 Termo’ -> "*" Fator Termo’ | "/" Fator Termo’ | ε
 Fator -> Id | Num | Flutuante | "(" Expressao ")"

@@ -1,34 +1,53 @@
 <h1>Analisador Sintático</h1>
+
 <h2>Gramaticas livres de contexto</h2>
 
-Programa -> first
-
-<h2>Declarações Básicas</h2>
-
-<h3>first -> Se statement | Caso | Enquanto | Comer</h3> 
-
-      | AtribVar 
-      | Comentario 
-      | Cuspir 
-      | ";"
+<h3>Símbolo inicial</h3>
 
 ```
-first -> sefaz first | enquantoLoop first | expressao first | ";" |  ∈
-sefaz -> "se" Condicao "faz" first A
-A -> "caso" first | ∈
+Programa -> declar
 ```
 
-<h3>enquantoLoop -> "enquanto" Condicao "repete" first</h3>
+<h3>Declarações Básicas</h3>
 
-Atribuições e Inicializações
+```
+declar -> first declar | ∈
+bloco -> "{" declar "}"
+first -> seFazSenao | enquantoLoop | sendoLoop | Comer | AtribVar | Comentario | Cuspir | ";"
+```
 
-<h3>AtribVar -> TipoVariavel id "=" Expressao ";"</h3>
+<h3>Condicional</h3>
 
-Tipos de Variáveis
+```
+seFazSenao -> "se" Condicao "faz" bloco senao
+senao -> "ou_se" Condicao "faz" bloco senao | "senao" bloco | ∈
+```
 
-<h3>TipoVariavel -> "inteiro" | "flutuante" | "texto"</h3>
+<h3>Repetição</h3>
 
-Sistema de Expressões
+```
+enquantoLoop -> "enquanto" Condicao "repete" bloco
+```
+
+<h3>For Loop</h3>
+
+```
+sendoLoop -> "sendo" AtribVar "ate" Condicao bloco
+```
+
+<h3>Atribuições e Inicializações</h3>
+
+```
+AtribVar -> TipoVariavel Id "=" Expressao ";"
+```
+
+<h3>Tipos de Variáveis</h3>h3>
+
+```
+TipoVariavel -> "inteiro" | "flutuante" | "texto"
+```
+
+<h3>Sistema de Expressões</h3>
 
 ```
 expressaoMat -> TexpressaoMat’
@@ -38,9 +57,12 @@ T´ -> *FT´ | /FT´ | ε
 F -> id | num | flutuante | input | ( mathExpressao )
 
 ```
+
 <h3>Condições</h3>
 
+```
 Condicao -> id Operador variavel
+```
 
 <h3>Operadores</h3>
 
@@ -51,11 +73,12 @@ OperadorComparacao -> ">" | "<" | "==" | "!=" | ">=" | "<="
 OperadorMat -> "+" | "-" | "*" | "/"
 OperadorAtribuicao -> "="
 ```
+
 <h3>Input e Print</h3>
 
 ```
-Comer -> "comer" first
-Cuspir -> "cuspir" first
+Comer -> "comer" texto | "comer" Id
+Cuspir -> "cuspir" texto | "cuspir" Id
 ```
 
 <h3>Sistema de Comentários</h3>
@@ -67,17 +90,22 @@ Comentario -> "obs:" [a-zA-Z0-9]* ";"
 <h3>Identificadores e Literais</h3>
 
 ```
-Variavel -> Id | num | flutuante | string
+Variavel -> Id | Num | Flutuante | texto
 Id -> [a-zA-Z][a-zA-Z0-9]*
 Num -> [0-9]+
 Flutuante -> Num "," Num
-String -> """ ([^"\n])* """
+texto -> """ ([^"\n])* """
 ```
+
 <h3>Caracteres Especiais e Delimitadores</h3>
 
 ```
 Delimitador -> "(" | ")"
-Exemplos de uso:
+```
+
+<h3>Exemplos de uso:</h3>
+
+```
 Declaração e atribuição:
 inteiro x = 10;
 flutuante y = 3.14;

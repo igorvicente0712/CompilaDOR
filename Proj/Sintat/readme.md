@@ -44,7 +44,7 @@ AtribVar -> TipoVariavel Id "=" Expressao ";"
 <h3>Tipos de Variáveis</h3>
 
 ```
-TipoVariavel -> "inteiro" | "flutuante" | "texto"
+TipoVariavel -> "inteiro" | "decimal" | "texto"
 ```
 
 <h3>Sistema de Expressões</h3>
@@ -54,7 +54,7 @@ Expressao -> Termo Expressao’
 Expressao’ -> "+" Termo Expressao’ | "-" Termo Expressao’ | ε
 Termo -> Fator Termo’
 Termo’ -> "*" Fator Termo’ | "/" Fator Termo’ | ε
-Fator -> Id | Num | Flutuante | "(" Expressao ")"
+Fator -> Id | Num | Decimal | "(" Expressao ")"
 ```
 
 <h3>Condições</h3>
@@ -89,10 +89,10 @@ Comentario -> "obs:" [a-zA-Z0-9]* ";"
 <h3>Identificadores e Literais</h3>
 
 ```
-Variavel -> Id | Num | Flutuante | Texto
+Variavel -> Id | Num | Decimal | Texto
 Id -> [a-zA-Z][a-zA-Z0-9]*
 Num -> [0-9]+
-Flutuante -> Num "," Num
+Decimal -> Num "," Num
 Texto -> """ ([^"\n])* """
 ```
 
@@ -107,7 +107,7 @@ Delimitador -> "(" | ")"
 ```
 Declaração e atribuição:
 inteiro x = 10;
-flutuante y = 3.14;
+decimal y = 3.14;
 texto mensagem = "Olá mundo";
 
 Estrutura Se:

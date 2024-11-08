@@ -7,7 +7,7 @@
  *
  * @author unienicmoraes
  */
-package literalmentelang.Lexer;
+package Lexer;
 
 import java.text.CharacterIterator;
 

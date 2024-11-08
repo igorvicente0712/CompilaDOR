@@ -1,4 +1,4 @@
-package literalmentelang.Lexer;
+package Lexer;
 import java.text.CharacterIterator;
 
 public abstract class AFD {

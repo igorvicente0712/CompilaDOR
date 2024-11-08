@@ -1,4 +1,4 @@
-package literalmentelang.Lexer;
+package Lexer;
 import java.text.CharacterIterator;
 
 public class MathOperator extends AFD {
@@ -15,7 +15,6 @@ public class MathOperator extends AFD {
                 } else {
                     return new Token("PLUS", "+");
                 }
-            //return new Token("PLUS", "+");
                 
             case '-':
                 code.next();
@@ -25,11 +24,6 @@ public class MathOperator extends AFD {
                 } else {
                     return new Token("SUB", "-");
                 }
-            //return new Token("SUB", "-");                
-                
-            case '=':
-                code.next();
-                return new Token("ATRIBUICAO", "=");
 
             case '/':
                 code.next();
@@ -38,6 +32,10 @@ public class MathOperator extends AFD {
             case '*':
                 code.next();
                 return new Token("MULT", "*");
+            
+            case '%':
+                code.next();
+                return new Token("MOD", "%");
 
             default:
                 return null;

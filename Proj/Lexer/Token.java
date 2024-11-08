@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
-package literalmentelang.Lexer;
+package Lexer;
 /**
  *
  * @author unienicmoraes
  */
 public class Token {
 
-    private String lexema;
-    private String tipo;
+    public String lexema;
+    public String tipo;
 
     public Token(String tipo, String lexema) {
         this. lexema = lexema;

@@ -1,8 +1,9 @@
-package literalmentelang.Lexer;
+package Lexer;
 
 import java.text.CharacterIterator;
 
 public class ID extends AFD {
+
     @Override
     public Token evaluate(CharacterIterator code) {
         if (Character.isLetter(code.current())) {

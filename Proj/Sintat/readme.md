@@ -41,7 +41,7 @@ sendoLoop -> "sendo" AtribVar "ate" Condicao bloco
 AtribVar -> TipoVariavel Id "=" Expressao ";"
 ```
 
-<h3>Tipos de Variáveis</h3>h3>
+<h3>Tipos de Variáveis</h3>
 
 ```
 TipoVariavel -> "inteiro" | "flutuante" | "texto"
@@ -50,18 +50,17 @@ TipoVariavel -> "inteiro" | "flutuante" | "texto"
 <h3>Sistema de Expressões</h3>
 
 ```
-expressaoMat -> TexpressaoMat’
-expressaoMat’ -> +TexpressaoMat’ | -TexpressaoMat’ | ε
-T -> FT´
-T´ -> *FT´ | /FT´ | ε
-F -> id | num | flutuante | input | ( mathExpressao )
-
+Expressao -> Termo Expressao’
+Expressao’ -> +Termo Expressao’ | -Termo Expressao’ | ε
+Termo -> Fator Termo’
+Termo’ -> "*" Fator Termo’ | "/" Fator Termo’ | ε
+Fator -> Id | Num | Flutuante | "(" Expressao ")"
 ```
 
 <h3>Condições</h3>
 
 ```
-Condicao -> id Operador variavel
+Condicao -> Expressao Operador Expressao
 ```
 
 <h3>Operadores</h3>
@@ -77,8 +76,8 @@ OperadorAtribuicao -> "="
 <h3>Input e Print</h3>
 
 ```
-Comer -> "comer" texto | "comer" Id
-Cuspir -> "cuspir" texto | "cuspir" Id
+Comer -> "comer" Texto ";" | "comer" Id ";"
+Cuspir -> "cuspir" Texto ";" | "cuspir" Id ";"
 ```
 
 <h3>Sistema de Comentários</h3>
@@ -90,11 +89,11 @@ Comentario -> "obs:" [a-zA-Z0-9]* ";"
 <h3>Identificadores e Literais</h3>
 
 ```
-Variavel -> Id | Num | Flutuante | texto
+Variavel -> Id | Num | Flutuante | Texto
 Id -> [a-zA-Z][a-zA-Z0-9]*
 Num -> [0-9]+
 Flutuante -> Num "," Num
-texto -> """ ([^"\n])* """
+Texto -> """ ([^"\n])* """
 ```
 
 <h3>Caracteres Especiais e Delimitadores</h3>

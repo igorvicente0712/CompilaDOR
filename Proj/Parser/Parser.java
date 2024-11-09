@@ -21,7 +21,7 @@ public class Parser {
 
     private void erro(String regra) {
         System.out.println("Regra: " + regra);
-        System.out.println("token inválido: " + token.lexema);
+        System.out.println("Token invalido: " + token.lexema);
         System.exit(0);
     }
     
@@ -35,42 +35,42 @@ public class Parser {
     private boolean firstToken() {
         if (matchLexema("obs:")) {
             if (comentario()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchLexema("se")) {
             if (ifelse()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchLexema("faz")) {
             if (expressao()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchTipo("ID")) {
             if (atribVariavel()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchLexema("enquanto")) {
             if (repeticao()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchLexema("sendo")) {
             if (forloop()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchLexema("escreve")) {
             if (escreve()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else if (matchLexema("recebe")) {
             if (recebe()) {
-                //firstToken();
+                firstToken();
                 return true;
             }
         } else {
@@ -87,23 +87,12 @@ public class Parser {
         //if (firstToken()) {
         if (declar()) {
             if (matchTipo("EOF")) {
-                System.out.print("}}");
-                System.out.println("CABOU CARAI");
+                System.out.println("##### Finalizado #####");
             } else {
-                erro("Fudeu de vez!!!!");
+                erro("Erro de token");
+                System.out.print(token.lexema);
             }
         }
-        
-
-        /*if (ifelse()) {
-            if (token.tipo == "EOF") {
-                System.out.println("sintaticamente correto");
-                } else {
-                erro("EOF");
-                }
-            }else{
-            erro("chamada ifelse");
-            }*/
     }
     
     public boolean bloco() {
@@ -129,7 +118,7 @@ public class Parser {
     }
 
     public boolean elsi() {
-        if (matchLexema("ou_se") 
+        if (matchLexema("ou") 
                 && condicao() 
                 && matchLexema("faz")
                 && bloco()
@@ -143,10 +132,10 @@ public class Parser {
     }
 
     public boolean condicao() {
-        if (matchTipo("ID") && operador() && matchTipo("NUM")) {
+        //if (matchTipo("ID") && operador() && matchTipo("NUM")) {
+        if (expressao() && operador() && expressao()) {
             return true;
         }
-        System.out.println("condicao deu ruim");
         erro("condicao");
         return false;
     }
@@ -241,7 +230,15 @@ public class Parser {
     }
 
     public boolean F() {
-        if (matchTipo("ID") || matchTipo("NUM") || (matchLexema("(") && expressao() && matchLexema(")"))) {
+        if (matchTipo("ID") 
+                || matchTipo("NUM")
+                || matchTipo("FLOAT")
+                || matchTipo("STRING")
+                || 
+                (matchLexema("(") 
+                    && expressao() 
+                    && matchLexema(")")
+                )) {
             return true;
         }
         erro("Expressao -> func F");
@@ -274,11 +271,11 @@ public class Parser {
     }
 
     public boolean forloop() {
-        if (matchTipo("ID")
-                && matchLexema(":")
+        if (atribVariavel()
+                && matchLexema("enquanto")
                 && condicao()
-                && matchLexema(":")
-                && expressao()) {
+                && matchLexema("repete")
+                && bloco()) {
             return true;
         }
         erro("forloop");
@@ -286,7 +283,7 @@ public class Parser {
     }
 
     public boolean atribVariavel() {
-        if (matchLexema("=") && expressao()) {
+        if (matchLexema("=") && expressao() && matchTipo("FIMLINHA")) {
             return true;
         }
         erro("atribVariavel");
@@ -324,7 +321,7 @@ public class Parser {
         //System.out.println("matchT -> ante do if sendo: recebe " + tipo + " compara " + token.tipo);
         //System.out.println("Tentando tipo: " + tipo + " com token: " + token.lexema);
         if (tipo.equals(token.tipo)) {
-            System.out.println("Tentando tipo: " + tipo + " com token: " + token.lexema);
+            System.out.println("Aceito tipo " + tipo + " com token: " + token.lexema);
             token = getNextToken();
             return true;
         }

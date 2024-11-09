@@ -1,1 +1,13 @@
-enquanto x < 5 repete x++
+inteiro teste = 2.
+texto bruh = "teste teste aaa". obs: isso eh um teste. 
+enquanto x < 5 repete 
+{ se 1 + 1 == 1 + 2 faz 
+    { se y == y + 1 faz {
+        x = x + 1.
+    } }
+ou b > 1 faz 
+{ inteiro tal = 2. sendo inteiro x = 0. enquanto x < 5 vistoQue x++ repete { x = x + 1. } } 
+senao { teste = 2. } 
+} 
+escreve "tal tal tal".
+x recebe inteiro.

@@ -4,7 +4,10 @@ import Lexer.Token;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+
 
 public class Parser {
 
@@ -44,18 +47,17 @@ public class Parser {
                 firstToken();
                 return true;
             }
-        } else if (matchLexema("faz", " ")) {
-            if (expressao()) {
-                firstToken();
-                return true;
-            }
-        } else if (matchLexema("inteiro", "Int ") || matchLexema("decimal", "Float ") || matchLexema("texto", "String ")) {
+        } else if (matchLexema("inteiro", "int ") || matchLexema("decimal", "float ") || matchLexema("texto", "String ")) {
             if (inicVariavel()) {
                 firstToken();
                 return true;
             }
         } else if (matchTipo("ID", token.lexema)) {
             if (atribVariavel()) {
+                firstToken();
+                return true;
+            }
+            else if (recebe()) {
                 firstToken();
                 return true;
             }
@@ -71,11 +73,6 @@ public class Parser {
             }
         } else if (matchLexema("escreve", "System.out.println(")) {
             if (escreve()) {
-                firstToken();
-                return true;
-            }
-        } else if (matchLexema("recebe", "Input.next")) {
-            if (recebe()) {
                 firstToken();
                 return true;
             }
@@ -251,7 +248,7 @@ public class Parser {
 
     public boolean forloop() {
         if (
-                (matchLexema("inteiro", "Int ") || matchLexema("decimal", "Float ") || matchLexema("texto", "String "))
+                (matchLexema("inteiro", "int ") || matchLexema("decimal", "float ") || matchLexema("texto", "String "))
                 && inicVariavel()
                 && matchLexema("enquanto", " (")
                 && condicao()
@@ -293,7 +290,12 @@ public class Parser {
     }
     
     public boolean atribVariavel() {
-        if (matchLexema("=", "=") && expressao() && matchTipo("FIMLINHA", ";\n")) {
+        if (
+                (matchLexema("=", "=") && expressao() && matchTipo("FIMLINHA", ";\n"))
+                || (matchLexema("recebe", "=scanner.next") 
+                        && (matchLexema("inteiro", "Int()") || matchLexema("decimal", "Float()") || matchLexema("texto", "()")) 
+                    && matchTipo("FIMLINHA", ";\n"))
+            ) {
             return true;
         }
         erro("atribVariavel");
@@ -308,8 +310,17 @@ public class Parser {
         return false;
     }
     
+    /* Esse nao funciona pra traducao de java, eu acho
     public boolean recebe() {
         if (matchTipo("ID", "(" + token.lexema + ")")) {
+            return true;
+        }
+        erro("recebe");
+        return false;
+    } */
+    
+    public boolean recebe() {
+        if (matchLexema("recebe", "scanner.next();") && matchTipo("FIMLINHA", ";\n")) {
             return true;
         }
         erro("recebe");
@@ -367,27 +378,26 @@ public class Parser {
     }
 
     private void traduz(String code) {
-        System.out.print(code);
+        //System.out.print(code);
         escreve(code);
     }
     
     public static void createFile() {
       try {
-        File myObj = new File("filename.txt");
-        if (myObj.createNewFile()) {
-          System.out.println("File created: " + myObj.getName());
-        } else {
-          System.out.println("File already exists.");
-        }
+        File myObj = new File("codigo_final.java");
+        FileWriter myWriter = new FileWriter("codigo_final.java", false);
+        myWriter.write("\n");
+        System.out.println("File created: " + myObj.getName());
+        
       } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
+            System.out.println("An error occurred.");
+            e.printStackTrace();
       }
     }
     
     public static void escreve(String traduzido) {
     try {
-      FileWriter myWriter = new FileWriter("filename.txt");
+      FileWriter myWriter = new FileWriter("codigo_final.java", true);
       myWriter.write(traduzido);
       myWriter.close();
       //System.out.println("Successfully wrote to the file.");

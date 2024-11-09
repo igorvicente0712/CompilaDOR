@@ -32,7 +32,7 @@ enquantoLoop -> "enquanto" Condicao "repete" bloco
 <h3>For Loop</h3>
 
 ```
-sendoLoop -> "sendo" AtribVar "enquanto" Condicao "repete" bloco
+sendoLoop -> "sendo" InicVar "enquanto" Condicao "vistoQue" Id ("=" Expressao || "++" || "--") "repete" bloco
 ```
 
 <h3>Atribuições e Inicializações</h3>
@@ -77,7 +77,7 @@ OperadorAtribuicao -> "="
 <h3>Input e Print</h3>
 
 ```
-recebe -> "recebe" Id "."
+recebe -> Id "recebe" TipoVariavel "." | TipoVariavel Id "recebe" TipoVariavel "."
 escreve -> "escreve" Texto "." | "escreve" Id "."
 ```
 
@@ -124,7 +124,7 @@ sendo i = 0 enquanto i < 3 repete escreve i.
 Input e Print:
 escreve "Digite um número:".
 
-recebe x.
+x recebe.
 
 escreve "Você digitou: ".
 

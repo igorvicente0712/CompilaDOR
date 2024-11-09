@@ -13,7 +13,7 @@ Programa -> declar
 ```
 declar -> first declar | ∈
 bloco -> "{" declar "}"
-first -> seFazSenao | enquantoLoop | sendoLoop | Comer | AtribVar | Comentario | Cuspir | "."
+first -> seFazSenao | enquantoLoop | sendoLoop | recebe | AtribVar | Comentario | escreve | "."
 ```
 
 <h3>Condicional</h3>
@@ -77,8 +77,8 @@ OperadorAtribuicao -> "="
 <h3>Input e Print</h3>
 
 ```
-Comer -> "comer" Id "."
-Cuspir -> "cuspir" Texto "." | "cuspir" Id "."
+recebe -> "recebe" Id "."
+escreve -> "escreve" Texto "." | "escreve" Id "."
 ```
 
 <h3>Sistema de Comentários</h3>
@@ -112,23 +112,23 @@ decimal y = 3.14.
 texto mensagem = "Olá mundo".
 
 Estrutura Se:
-se x > 10 faz cuspir "Maior que 10" senao cuspir "Menor ou igual a 10".
+se x > 10 faz escreve "Maior que 10" senao escreve "Menor ou igual a 10".
 
 Estrutura enquanto:
-enquanto i < 10 repete cuspir i.
+enquanto i < 10 repete escreve i.
 
 Estrut sendo repete
 
-sendo i = 0 enquanto i < 3 repete cuspir i.
+sendo i = 0 enquanto i < 3 repete escreve i.
 
 Input e Print:
-cuspir "Digite um número:".
+escreve "Digite um número:".
 
-comer x.
+recebe x.
 
-cuspir "Você digitou: ".
+escreve "Você digitou: ".
 
-cuspir x.
+escreve x.
 
 Comentários:
 obs: Este é um comentário.
@@ -141,7 +141,7 @@ inteiro resultado = (x + y) * (z - w).
 
 se (a > b && c < d || e == f) {
 
-cuspir "Condição complexa".
+escreve "Condição complexa".
 }
 
 ```

@@ -32,7 +32,7 @@ enquantoLoop -> "enquanto" Condicao "repete" bloco
 <h3>For Loop</h3>
 
 ```
-sendoLoop -> "sendo" AtribVar "ate" Condicao bloco
+sendoLoop -> "sendo" AtribVar "enquanto" Condicao "repete" bloco
 ```
 
 <h3>Atribuições e Inicializações</h3>
@@ -118,7 +118,7 @@ enquanto i < 10 repete cuspir(i);
 
 Estrut sendo repete
 
-sendo i = 0 até i < 3 repete cuspir(i);
+sendo i = 0 enquanto i < 3 repete cuspir(i);
 
 Input e Print:
 cuspir("Digite um número:");

@@ -13,7 +13,7 @@ Programa -> declar
 ```
 declar -> first declar | ∈
 bloco -> "{" declar "}"
-first -> seFazSenao | enquantoLoop | sendoLoop | Comer | AtribVar | Comentario | Cuspir | ";"
+first -> seFazSenao | enquantoLoop | sendoLoop | Comer | AtribVar | Comentario | Cuspir | "."
 ```
 
 <h3>Condicional</h3>
@@ -38,7 +38,8 @@ sendoLoop -> "sendo" AtribVar "enquanto" Condicao "repete" bloco
 <h3>Atribuições e Inicializações</h3>
 
 ```
-AtribVar -> TipoVariavel Id "=" Expressao ";"
+InicVar -> TipoVariavel AtribVar
+AtribVar -> TipoVariavel Id "=" Expressao "."
 ```
 
 <h3>Tipos de Variáveis</h3>
@@ -76,14 +77,14 @@ OperadorAtribuicao -> "="
 <h3>Input e Print</h3>
 
 ```
-Comer -> "comer" Texto ";" | "comer" Id ";"
-Cuspir -> "cuspir" Texto ";" | "cuspir" Id ";"
+Comer -> "comer" Id "."
+Cuspir -> "cuspir" Texto "." | "cuspir" Id "."
 ```
 
 <h3>Sistema de Comentários</h3>
 
 ```
-Comentario -> "obs:" [a-zA-Z0-9]* ";"
+Comentario -> "obs:" [a-zA-Z0-9]* "."
 ```
 
 <h3>Identificadores e Literais</h3>
@@ -106,41 +107,41 @@ Delimitador -> "(" | ")"
 
 ```
 Declaração e atribuição:
-inteiro x = 10;
-decimal y = 3.14;
-texto mensagem = "Olá mundo";
+inteiro x = 10.
+decimal y = 3.14.
+texto mensagem = "Olá mundo".
 
 Estrutura Se:
-se x > 10 faz cuspir("Maior que 10") senao cuspir "Menor ou igual a 10";
+se x > 10 faz cuspir "Maior que 10" senao cuspir "Menor ou igual a 10".
 
 Estrutura enquanto:
-enquanto i < 10 repete cuspir(i);
+enquanto i < 10 repete cuspir i.
 
 Estrut sendo repete
 
-sendo i = 0 enquanto i < 3 repete cuspir(i);
+sendo i = 0 enquanto i < 3 repete cuspir i.
 
 Input e Print:
-cuspir("Digite um número:");
+cuspir "Digite um número:".
 
-comer(x);
+comer x.
 
-cuspir("Você digitou: ");
+cuspir "Você digitou: ".
 
-cuspir(x);
+cuspir x.
 
 Comentários:
-obs: Este é um comentário;
+obs: Este é um comentário.
 
-inteiro soma = 0; obs Inicializa a variável soma;
+inteiro soma = 0. obs Inicializa a variável soma.
 
 
 Expressões Complexas:
-inteiro resultado = (x + y) * (z - w);
+inteiro resultado = (x + y) * (z - w).
 
 se (a > b && c < d || e == f) {
 
-cuspir("Condição complexa");
+cuspir "Condição complexa".
 }
 
 ```

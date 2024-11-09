@@ -20,7 +20,7 @@ first -> seFazSenao | enquantoLoop | sendoLoop | Comer | AtribVar | Comentario |
 
 ```
 seFazSenao -> "se" Condicao "faz" bloco senao
-senao -> "ou_se" Condicao "faz" bloco senao | "senao" bloco | ∈
+senao -> "ou" Condicao "faz" bloco senao | "senao" bloco | ∈
 ```
 
 <h3>Repetição</h3>

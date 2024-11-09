@@ -30,7 +30,7 @@ public class Comentario extends AFD {
                         comment += readComment(code);
 
                         if (endComment(code)) {
-                            return new Token("Comentario", comment);
+                            return new Token("COMMENT", comment);
                         }
                     }
                 }

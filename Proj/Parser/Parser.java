@@ -33,11 +33,9 @@ public class Parser {
     }
     
     private boolean firstToken() {
-        if (matchLexema("obs:")) {
-            if (comentario()) {
-                firstToken();
-                return true;
-            }
+        if (matchTipo("COMMENT")) {
+            firstToken();
+            return true;
         } else if (matchLexema("se")) {
             if (ifelse()) {
                 firstToken();
@@ -45,6 +43,11 @@ public class Parser {
             }
         } else if (matchLexema("faz")) {
             if (expressao()) {
+                firstToken();
+                return true;
+            }
+        } else if (matchLexema("inteiro") || matchLexema("decimal") || matchLexema("texto")) {
+            if (inicVariavel()) {
                 firstToken();
                 return true;
             }
@@ -137,14 +140,6 @@ public class Parser {
             return true;
         }
         erro("condicao");
-        return false;
-    }
-
-    public boolean comentario() {
-        if (matchLexema("obs:")) {
-            return true;
-        }
-        erro("cometario");
         return false;
     }
 
@@ -271,7 +266,9 @@ public class Parser {
     }
 
     public boolean forloop() {
-        if (atribVariavel()
+        if (
+                (matchLexema("inteiro") || matchLexema("decimal") || matchLexema("texto"))
+                && inicVariavel()
                 && matchLexema("enquanto")
                 && condicao()
                 && matchLexema("repete")
@@ -281,7 +278,15 @@ public class Parser {
         erro("forloop");
         return false;
     }
-
+    
+    public boolean inicVariavel() {
+        if (matchTipo("ID") && atribVariavel()) {
+            return true;
+        }
+        erro("inicVariavel");
+        return false;
+    }
+    
     public boolean atribVariavel() {
         if (matchLexema("=") && expressao() && matchTipo("FIMLINHA")) {
             return true;
@@ -299,7 +304,7 @@ public class Parser {
     }
     
     public boolean recebe() {
-        if (matchTipo("STRING") || matchTipo("ID")) {
+        if (matchTipo("ID")) {
             return true;
         }
         erro("recebe");

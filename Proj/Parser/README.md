@@ -32,7 +32,7 @@ enquantoLoop -> "enquanto" Condicao "repete" bloco
 <h3>For Loop</h3>
 
 ```
-sendoLoop -> "sendo" AtribVar "enquanto" Condicao "vistoQue" Id ("=" Expressao || "++" || "--") "repete" bloco
+sendoLoop -> "sendo" InicVar "enquanto" Condicao "vistoQue" Id ("=" Expressao || "++" || "--") "repete" bloco
 ```
 
 <h3>Atribuições e Inicializações</h3>

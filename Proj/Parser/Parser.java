@@ -144,8 +144,8 @@ public class Parser {
     }
 
     public boolean operador() {
-        if (matchLexema("ou")
-                || matchLexema("e")
+        if (matchLexema("||")
+                || matchLexema("&&")
                 || matchLexema(">")
                 || matchLexema("<")
                 || matchLexema("==")

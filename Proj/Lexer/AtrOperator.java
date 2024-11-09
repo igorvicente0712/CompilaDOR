@@ -23,12 +23,24 @@ public class AtrOperator extends AFD {
             case '<':
                 code.next();
                 return new Token("MENOR", "<");
-
+            
+            case '|':
+                code.next();
+                if (code.current() == '|') {
+                    code.next();
+                    return new Token("OU", "||");
+                } 
+            
+            case '&':
+                code.next();
+                if (code.current() == '&') {
+                    code.next();
+                    return new Token("E", "&&");
+                } 
             default:
                 return null;
 
         }
-
     }
 
 }

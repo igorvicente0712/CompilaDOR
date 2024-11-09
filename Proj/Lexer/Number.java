@@ -36,6 +36,8 @@ private boolean endNumber (CharacterIterator code) {
     code.current() == '/' ||
     code.current() == '*' ||
     code.current() == '\n' ||
+    code.current() == '\r' ||
+    code.current() == '.' ||
     code.current() == CharacterIterator.DONE;
 }
 

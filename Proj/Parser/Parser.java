@@ -26,7 +26,7 @@ public class Parser {
     }
     
     private boolean declar() {
-        if (firstToken() && (declar())) {
+        if (firstToken()) {
             return true;
         }
         return true;
@@ -35,42 +35,42 @@ public class Parser {
     private boolean firstToken() {
         if (matchLexema("obs:")) {
             if (comentario()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchLexema("se")) {
             if (ifelse()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchLexema("faz")) {
             if (expressao()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchTipo("ID")) {
             if (atribVariavel()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchLexema("enquanto")) {
             if (repeticao()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchLexema("sendo")) {
             if (forloop()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchLexema("escreve")) {
             if (escreve()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else if (matchLexema("recebe")) {
             if (recebe()) {
-                firstToken();
+                //firstToken();
                 return true;
             }
         } else {
@@ -84,8 +84,8 @@ public class Parser {
     public void main() {
         token = getNextToken();
 
-        //if (firstToken()) { // TODO COLOCAR O DECLAR
-        if (declar()) { // TODO COLOCAR O DECLAR
+        //if (firstToken()) {
+        if (declar()) {
             if (matchTipo("EOF")) {
                 System.out.print("}}");
                 System.out.println("CABOU CARAI");
@@ -107,21 +107,20 @@ public class Parser {
     }
     
     public boolean bloco() {
-        if ( matchLexema("{") 
+        if ( matchTipo("ABREBLOCO") 
                 && declar()
-                && matchLexema("}")) {
+                && matchTipo("FECHABLOCO")) {
             return true;
         }
         erro("bloco");
         return false;
     }
     
-    public boolean ifelse() { //TODO ARRUMAR DE ACODO COM GLC
-        if ( //matchLexema("if") 
-                //&& 
+    public boolean ifelse() {
+        if (
                 condicao()
                 && matchLexema("faz")
-                && expressao()
+                && bloco()
                 && elsi()) {
             return true;
         }
@@ -130,7 +129,14 @@ public class Parser {
     }
 
     public boolean elsi() {
-        if (matchLexema("ou_se")) {
+        if (matchLexema("ou_se") 
+                && condicao() 
+                && matchLexema("faz")
+                && bloco()
+                && elsi()) {
+            return true;
+        }
+        else if (matchLexema("senao") && bloco()) {
             return true;
         }
         return true;

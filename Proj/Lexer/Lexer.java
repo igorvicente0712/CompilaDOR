@@ -22,10 +22,11 @@ public class Lexer {
         afds.add(new Number());
         afds.add(new ID());
         afds.add(new Text());
+        afds.add(new BlocoDelimiter());
     }
 
     public void skipWhiteSpace() {
-        while (code.current() == ' ' || code.current() == '\n') {
+        while (code.current() == ' ' || code.current() == '\n' || code.current() == '\r') {
             code.next();
         }
 
@@ -60,7 +61,7 @@ public class Lexer {
             if (accepted) {
                 continue;
             }
-            throw new RuntimeException("Error: Token not recognized: " + code.current());
+            throw new RuntimeException("Error: Token not recognized: " + code.current() );
         }
         tokens.add(new Token("EOF", "$"));
         return tokens;

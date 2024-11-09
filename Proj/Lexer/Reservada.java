@@ -4,7 +4,8 @@ import java.text.CharacterIterator;
 
 public class Reservada extends AFD {
 
-    String reservadas[] = {"se", "faz", "ou_se", "sendo", "enquanto", "repete", "recebe", "escreve", "eh"};
+    String reservadas[] = {"se", "faz", "ou_se", "sendo", "enquanto", "repete",
+        "recebe", "escreve", "eh", "inteiro", "decimal", "texto"};
 
     @Override
     public Token evaluate(CharacterIterator code) {

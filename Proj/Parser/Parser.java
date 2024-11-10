@@ -269,7 +269,8 @@ public class Parser {
         if (matchTipo("ID", token.lexema) && 
                 (
                     (matchLexema("++", "++") || matchLexema("--", "--") )
-                ) || (matchLexema("=", "=") && expressao())
+                     || (matchLexema("=", "=") && expressao())
+                )
             ) {
             return true;
         }
@@ -380,8 +381,8 @@ public class Parser {
     
     public static void createFile() {
       try {
-        File myObj = new File("codigo_final.java");
-        FileWriter myWriter = new FileWriter("codigo_final.java", false);
+        File myObj = new File("Main.java");
+        FileWriter myWriter = new FileWriter("Main.java", false);
         myWriter.write("\n");
         System.out.println("File created: " + myObj.getName());
         
@@ -393,7 +394,7 @@ public class Parser {
     
     public static void escreve(String traduzido) {
     try {
-      FileWriter myWriter = new FileWriter("codigo_final.java", true);
+      FileWriter myWriter = new FileWriter("Main.java", true);
       myWriter.write(traduzido);
       myWriter.close();
       //System.out.println("Successfully wrote to the file.");

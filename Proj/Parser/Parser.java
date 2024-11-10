@@ -57,10 +57,6 @@ public class Parser {
                 firstToken();
                 return true;
             }
-            else if (recebe()) {
-                firstToken();
-                return true;
-            }
         } else if (matchLexema("enquanto", "while (")) {
             if (repeticao()) {
                 firstToken();

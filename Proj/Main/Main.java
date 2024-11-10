@@ -49,7 +49,7 @@ public class Main {
         
         Parser.escreve("\t}\n}");
         try {
-            System.out.println("Codigo final:\n" + Files.readString(Paths.get("codigo_final.java")));
+            System.out.println("Codigo final:\n" + Files.readString(Paths.get("Main.java")));
         } catch (IOException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }

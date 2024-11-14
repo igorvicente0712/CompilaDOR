@@ -108,7 +108,7 @@ Delimitador -> "(" | ")"
 ```
 Declaração e atribuição:
 inteiro x = 10.
-decimal y = 3.14.
+decimal y = 3,14.
 texto mensagem = "Olá mundo".
 
 Estrutura Se:
@@ -119,7 +119,7 @@ enquanto i < 10 repete escreve i.
 
 Estrut sendo repete
 
-sendo i = 0 enquanto i < 3 repete escreve i.
+sendo i = 0 enquanto i < 3 vistoQue i++ repete {escreve i.}
 
 Input e Print:
 escreve "Digite um número:".
